@@ -52,9 +52,57 @@ const data = [
   // Add more data items as needed
 ];
 
+const dataSecond = [
+  {
+    id: "1",
+    Title: "Hello",
+
+    imageUrl: "https://via.placeholder.com/50",
+  },
+  {
+    id: "2",
+    Title: "Hello",
+
+    imageUrl: "https://via.placeholder.com/50",
+  },
+  {
+    id: "3",
+    Title: "Hello",
+
+    imageUrl: "https://via.placeholder.com/50",
+  },
+  {
+    id: "4",
+    Title: "Hello",
+
+    imageUrl: "https://via.placeholder.com/50",
+  },
+  {
+    id: "5",
+    Title: "Hello",
+
+    imageUrl: "https://via.placeholder.com/50",
+  },
+  {
+    id: "6",
+    Title: "Hello",
+    imageUrl: "https://via.placeholder.com/50",
+  },
+  // Add more data items as needed
+];
+
 const renderItem = ({ item }) => (
   <View style={{ marginLeft: MARGIN.MEDIUM }}>
     <Image style={styles.peoplesimage} source={{ uri: item.imageUrl }} />
+  </View>
+);
+const renderItem2 = ({ item }) => (
+  <View style={{ marginLeft: MARGIN.MEDIUM }}>
+    <Text style={styles.listTitle}>{item.Title}</Text>
+    <Image
+      style={styles.fourthContainerimage}
+      source={{ uri: item.imageUrl }}
+    />
   </View>
 );
 const Ethiopia = () => {
@@ -153,12 +201,73 @@ const Ethiopia = () => {
             </View>
           </Pressable>
         </View>
-        <View style={styles.peoplesContainer}>
+        <View style={styles.secondContainer}>
           <Text style={styles.subHeading}>Peoples</Text>
-          <View style={styles.innerPeoplesContainer}>
+          <View style={styles.innerSecondContainer}>
             <FlatList
               data={data}
               renderItem={renderItem}
+              nestedScrollEnabled={true}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+        </View>
+        <View style={styles.thirdContainer}>
+          <Pressable style={styles.innerThirdContainer}>
+            <View
+              style={
+                {
+                  //paddingHorizontal: PADDING.MEDIUM,
+                }
+              }
+            >
+              <View
+                style={{
+                  //marginHorizontal: MARGIN.MEDIUM,
+                  borderTopLeftRadius: 15,
+                  borderBottomLeftRadius: 15,
+                  backgroundColor: "grey",
+                  width: 85,
+                  height: 95,
+                }}
+              ></View>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                marginLeft: MARGIN.MEDIUM,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: FONT_SIZES.MEDIUM,
+                  fontWeight: "400",
+                  fontStyle: "normal",
+
+                  paddingVertical: 4,
+                  color: "#171A1F",
+                }}
+              >
+                Languages
+              </Text>
+              <Text
+                style={{ color: Colors.SECONDARY }}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
+                Know more about ethiopian language
+              </Text>
+            </View>
+          </Pressable>
+        </View>
+        <View style={styles.fourthContainer}>
+          <Text style={styles.subHeading}>Cuisine</Text>
+          <View style={styles.innerfourthContainer}>
+            <FlatList
+              data={dataSecond}
+              renderItem={renderItem2}
               nestedScrollEnabled={true}
               keyExtractor={(item) => item.id}
               horizontal
@@ -215,7 +324,7 @@ const styles = StyleSheet.create({
   historyContainer: {
     marginTop: MARGIN.SMALL,
   },
-  peoplesContainer: {
+  secondContainer: {
     marginTop: MARGIN.SMALL,
   },
   peoplesimage: {
@@ -223,8 +332,42 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: BORDER_RADIUS.EXTRA_LARGE,
   },
-  innerPeoplesContainer: {
+  innerSecondContainer: {
     paddingVertical: PADDING.SMALL / 2,
     justifyContent: "space-between",
+  },
+  innerThirdContainer: {
+    alignItems: "center",
+    borderRadius: 14,
+    display: "flex",
+    marginHorizontal: 10,
+    borderWidth: 1,
+    height: 95,
+    justifyContent: "center",
+    flex: 1,
+    flexDirection: "row",
+    paddingVertical: PADDING.SMALL,
+  },
+  thirdContainer: {
+    marginTop: MARGIN.SMALL,
+  },
+  fourthContainer: {
+    marginTop: MARGIN.SMALL,
+  },
+  fourthContainerimage: {
+    width: 135,
+    height: 95,
+    borderRadius: BORDER_RADIUS.LARGE,
+  },
+  innerfourthContainer: {
+    paddingVertical: PADDING.SMALL / 2,
+    justifyContent: "space-between",
+  },
+  listTitle: {
+    fontSize: FONT_SIZES.MEDIUM,
+    fontWeight: "600",
+    color: "#323743",
+    marginVertical: MARGIN.SMALL,
+    marginLeft: MARGIN.SMALL,
   },
 });

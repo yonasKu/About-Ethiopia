@@ -88,7 +88,18 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </TouchableOpacity>
           <View style={styles.placesContainer}>
-            <Text style={styles.subHeaderText}>Places</Text>
+            <View style={styles.headerTextContainer}>
+              <Text style={styles.subHeaderText}>Places</Text>
+              <TouchableOpacity
+                style={{ position: "absolute", right: 10 }}
+                onPress={() => {
+                  navigation.navigate("Places");
+                }}
+              >
+                <Text style={styles.navigateText}>View All</Text>
+              </TouchableOpacity>
+            </View>
+
             <FlatList
               data={data}
               renderItem={renderItem}
@@ -98,17 +109,23 @@ const HomeScreen = ({ navigation }) => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          <Pressable style={styles.entertainmentContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Entertainment");
+            }}
+            style={styles.entertainmentContainer}
+          >
             <View style={{ flex: 1, flexDirection: "row" }}>
               <View
                 style={{
                   flex: 0.5,
+                  marginRight: MARGIN.MEDIUM,
                   justifyContent: "center",
                 }}
               >
                 <Text
                   style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: "400",
                     fontStyle: "normal",
                     //lineHeight: 28,
@@ -119,7 +136,7 @@ const HomeScreen = ({ navigation }) => {
                   Entertainment
                 </Text>
                 <Text
-                  style={{ color: "#424856" }}
+                  style={{ fontSize: 12, color: "#424856" }}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -134,12 +151,13 @@ const HomeScreen = ({ navigation }) => {
                 style={{
                   flex: 0.5,
                   // width: 163,
-                  // height: 76,
+                  //height: 76,
                   borderRadius: 4,
                   backgroundColor: "#D9D9D9",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: 20,
+                  //justifyContent: "center",
+                  justifyContent: "flex-end",
+                  alignSelf: "flex-end",
+                  padding: 12,
                 }}
               >
                 <View
@@ -150,12 +168,13 @@ const HomeScreen = ({ navigation }) => {
                 ></View>
               </View>
             </View>
-          </Pressable>
-          <Pressable style={styles.TipsContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.TipsContainer}>
             <View
               style={{
                 paddingHorizontal: PADDING.MEDIUM,
                 flex: 0.75,
+                marginRight: MARGIN.SMALL,
               }}
             >
               <Text
@@ -171,7 +190,7 @@ const HomeScreen = ({ navigation }) => {
                 Travel Tips
               </Text>
               <Text
-                style={{ color: Colors.SECONDARY }}
+                style={{ fontSize: 12, color: Colors.SECONDARY }}
                 numberOfLines={2}
                 ellipsizeMode="tail"
               >
@@ -193,7 +212,7 @@ const HomeScreen = ({ navigation }) => {
                 }}
               ></View>
             </View>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -223,10 +242,10 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: Colors.WHITE,
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "600",
     fontStyle: "normal",
-    lineHeight: 42,
+    lineHeight: 32,
   },
   containerinner: {
     margin: 2,
@@ -278,11 +297,11 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     marginHorizontal: 18,
-    //backgroundColor: "blue",
     paddingVertical: 10,
-    paddingHorizontal: 25,
+    paddingHorizontal: 15,
     borderRadius: 15,
     justifyContent: "center",
+
     backgroundColor: "#FFFEFE",
     marginTop: MARGIN.SMALL,
   },
@@ -293,11 +312,20 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     marginHorizontal: 10,
-    borderWidth: 1,
-    height: 105,
+    borderWidth: 0.5,
+    borderColor: Colors.LightestGray,
+
     justifyContent: "center",
     flex: 1,
     flexDirection: "row",
     padding: PADDING.SMALL,
+  },
+  navigateText: {
+    fontSize: 12,
+    color: Colors.TextPurple,
+  },
+  headerTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
