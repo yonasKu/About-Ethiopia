@@ -194,61 +194,6 @@ const EntertainmentScreeen = () => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
-          <TouchableOpacity style={styles.entertainmentContainer}>
-            <View style={{ flex: 1, flexDirection: "row" }}>
-              <View
-                style={{
-                  flex: 0.5,
-                  marginRight: MARGIN.MEDIUM,
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: "400",
-                    fontStyle: "normal",
-                    //lineHeight: 28,
-                    paddingVertical: 4,
-                    color: "#171A1F",
-                  }}
-                >
-                  Entertainment
-                </Text>
-                <Text
-                  style={{ fontSize: 12, color: "#424856" }}
-                  numberOfLines={2}
-                  ellipsizeMode="tail"
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
-                  magnam at accusamus quos vitae. Vero molestiae hic dignissimos
-                  culpa incidunt, aut qui. Accusantium aliquam est corporis
-                  saepe exercitationem tempore id.
-                </Text>
-              </View>
-
-              <View
-                style={{
-                  flex: 0.5,
-                  // width: 163,
-                  //height: 76,
-                  borderRadius: 4,
-                  backgroundColor: "#D9D9D9",
-                  //justifyContent: "center",
-                  justifyContent: "flex-end",
-                  alignSelf: "flex-end",
-                  padding: 12,
-                }}
-              >
-                <View
-                  style={{
-                    width: 45,
-                    height: 45,
-                  }}
-                ></View>
-              </View>
-            </View>
-          </TouchableOpacity>
         </View>
         <View style={styles.thirdContainer}>
           <View>
