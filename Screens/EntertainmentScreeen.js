@@ -14,74 +14,74 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import { Entypo } from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
+
 import Colors from "../Utils/Colors";
 import { BORDER_RADIUS, FONT_SIZES, MARGIN, PADDING } from "../Utils/Constants";
 
-const data = [
+const data2 = [
   {
     id: "1",
-    name: "Gondar",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    Date: "March 2 - March 4",
+    event: "Timket",
     imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: "2",
-    name: "Gondar",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    Date: "March 2 - March 4",
+    event: "Timket",
     imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: "4",
-    name: "Gonr",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    Date: "March 2 - March 4",
+    event: "Timket",
     imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: "3",
-    name: "Gondar",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    Date: "March 2 - March 4",
+    event: "Timket",
     imageUrl: "https://via.placeholder.com/150",
   },
   // Add more data items as needed
 ];
 
-const data2 = [
+const data = [
   {
     id: "1",
-    name: "Gondar",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    location: "Gondar",
+    place: "Ethiopia park",
     imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: "2",
-    name: "Gondar",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    location: "Gondar",
+    place: "Ethiopia park",
     imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: "4",
-    name: "Gonr",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    location: "Gondar",
+    place: "Ethiopia park",
     imageUrl: "https://via.placeholder.com/150",
   },
   {
     id: "3",
-    name: "Gondar",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quos mollitia, quam facilis quia saepe non. Obcaecati accusantium, consectetur quas deleniti facere in tempore laboriosam ea quos repudiandae, officia dolorum.",
+    location: "Gondar",
+    place: "Ethiopia park",
     imageUrl: "https://via.placeholder.com/150",
   },
   // Add more data items as needed
 ];
 const renderItem = ({ item }) => (
-  <View style={[styles.itemContainer, { backgroundColor: "gray" }]}>
+  <TouchableOpacity
+    style={[
+      styles.itemContainer,
+      { backgroundColor: "#F2F3F4", marginTop: MARGIN.SMALL },
+    ]}
+  >
     {/* <Image style={styles.image} source={{ uri: item.imageUrl }} /> */}
 
     {/* <View
@@ -94,16 +94,30 @@ const renderItem = ({ item }) => (
       }}
     ></View> */}
     <View style={{ flex: 1, justifyContent: "flex-end" }}>
-      <Text style={{ color: "#9095A1", fontSize: 16 }}>{item.name}</Text>
-      <Text style={{ color: "#424856" }} numberOfLines={1} ellipsizeMode="tail">
-        {item.description}
-      </Text>
+      <View style={{ alignItems: "center", flexDirection: "row", padding: 4 }}>
+        <EvilIcons name="location" size={22} color="black" />
+        <View>
+          <Text style={{ color: "#9095A1", fontSize: 10, lineHeight: 10 }}>
+            {item.location}
+          </Text>
+          <Text
+            style={{ color: "#424856", fontSize: 8, lineHeight: 8 }}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {item.place}
+          </Text>
+        </View>
+      </View>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 const renderSecondItem = ({ item }) => (
   <View style={[styles.SeconditemContainer]}>
-    <Image style={styles.image} source={{ uri: item.imageUrl }} />
+    <Image
+      style={[styles.image, { borderRadius: 14 }]}
+      source={{ uri: item.imageUrl }}
+    />
     {/* <View
       style={{
         width: 110,
@@ -114,14 +128,33 @@ const renderSecondItem = ({ item }) => (
       }}
     ></View> */}
     <View style={{ flex: 1, justifyContent: "flex-end" }}>
-      <Text style={{ color: "#9095A1", fontSize: 16 }}>{item.name}</Text>
-      <Text style={{ color: "#424856" }} numberOfLines={1} ellipsizeMode="tail">
-        {item.description}
+      <Text
+        style={{
+          color: "#9095A1",
+          fontSize: 12,
+          paddingHorizontal: 4,
+          paddingVertical: 4,
+        }}
+      >
+        {item.Date}
       </Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Text
+          style={{ paddingHorizontal: 4, color: "#424856", fontSize: 14 }}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {item.event}
+        </Text>
+        <View style={{ flexDirection: "row" }}>
+          <EvilIcons name="location" size={22} color="#8E94A0" />
+          <Text style={{ color: "#BDC0C9" }}>TBA</Text>
+        </View>
+      </View>
     </View>
   </View>
 );
-const EntertainmentScreeen = () => {
+const EntertainmentScreeen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -130,10 +163,11 @@ const EntertainmentScreeen = () => {
           style={{
             marginTop: MARGIN.SMALL,
             marginLeft: 10,
+            alignItems: "flex-start",
             justifyContent: "center",
           }}
         >
-          <Text style={styles.headerText}>Where to ?</Text>
+          <Text style={styles.headerText}>Night Life</Text>
         </View>
 
         <View
@@ -153,10 +187,38 @@ const EntertainmentScreeen = () => {
               style={{
                 marginTop: 15,
                 borderRadius: BORDER_RADIUS.MEDIUM,
-                backgroundColor: "#165434",
+                backgroundColor: "#E5696D",
                 height: 105,
+                justifyContent: "center",
+                paddingLeft: 20,
               }}
-            ></View>
+            >
+              <View>
+                <Text
+                  style={{
+                    // paddingHorizontal: 15,
+                    // paddingTop: 15,
+                    fontSize: 20,
+                    color: "#FCF2F2",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Clubs,Resorts
+                </Text>
+              </View>
+              <View style={{ gap: 8, flexDirection: "row" }}>
+                <Text
+                  style={{
+                    // paddingHorizontal: 20,
+                    fontSize: 14,
+                    color: "#F6F2FF",
+                  }}
+                >
+                  discover places
+                </Text>
+                <Entypo name="chevron-small-right" size={24} color="#F6F2FF" />
+              </View>
+            </View>
           </View>
 
           <View
@@ -166,7 +228,7 @@ const EntertainmentScreeen = () => {
               height: 120,
               position: "absolute",
               top: 0,
-              right: 0,
+              right: 30,
             }}
           ></View>
         </View>
@@ -174,7 +236,7 @@ const EntertainmentScreeen = () => {
         <View style={styles.secondContainer}>
           <View style={styles.SecondInnerContainer}>
             <View style={styles.headerTextContainer}>
-              <Text style={styles.subHeaderText}>Places</Text>
+              <Text style={styles.headerText}>Arts & Gallery</Text>
               <TouchableOpacity
                 style={{ position: "absolute", right: 10 }}
                 onPress={() => {
@@ -198,7 +260,7 @@ const EntertainmentScreeen = () => {
         <View style={styles.thirdContainer}>
           <View>
             <View style={styles.headerTextContainer}>
-              <Text style={styles.subHeaderText}>Festivals</Text>
+              <Text style={styles.headerText}>Festivals</Text>
               <TouchableOpacity
                 style={{ position: "absolute", right: 10 }}
                 onPress={() => {
@@ -303,5 +365,68 @@ const styles = StyleSheet.create({
 
     // Adjust the width as needed
     marginBottom: MARGIN.LARGE,
+  },
+  SecondInnerContainer: {
+    marginTop: MARGIN.SMALL,
+  },
+  headerText: {
+    fontWeight: "700",
+    fontSize: 16,
+    lineHeight: 26,
+    color: "#333333",
+    textAlign: "right",
+  },
+  descriptionText: {
+    color: "#808080",
+  },
+  priceDescriptionContainer: {
+    justifyContent: "space-between",
+    gap: 20,
+  },
+  priceDescriptionBlock: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  priceDescription: {
+    fontSize: 16,
+    color: "#333333",
+  },
+  finalPriceContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  finalPriceDescription: {
+    color: "#333333",
+    lineHeight: 26,
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  bottomContainer: {
+    flexDirection: "row",
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    paddingTop: 16,
+    paddingRight: 16,
+    paddingBottom: 0,
+    paddingLeft: 16,
+  },
+  summary: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+  checkoutButtonContainer: {
+    padding: 16,
+  },
+  checkoutButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#203F77",
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    gap: 8,
+    borderRadius: 8,
   },
 });
