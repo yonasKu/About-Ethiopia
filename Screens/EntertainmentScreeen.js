@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -75,86 +75,101 @@ const data = [
   },
   // Add more data items as needed
 ];
-const renderItem = ({ item }) => (
-  <TouchableOpacity
-    style={[
-      styles.itemContainer,
-      { backgroundColor: "#F2F3F4", marginTop: MARGIN.SMALL },
-    ]}
-  >
-    {/* <Image style={styles.image} source={{ uri: item.imageUrl }} /> */}
 
-    {/* <View
-      style={{
-        width: 110,
-        height: 160,
-        backgroundColor: "gray",
-        borderRadius: BORDER_RADIUS.MEDIUM,
-        marginVertical: 8,
-      }}
-    ></View> */}
-    <View style={{ flex: 1, justifyContent: "flex-end" }}>
-      <View style={{ alignItems: "center", flexDirection: "row", padding: 4 }}>
-        <EvilIcons name="location" size={22} color="black" />
-        <View>
-          <Text style={{ color: "#9095A1", fontSize: 10, lineHeight: 10 }}>
-            {item.location}
-          </Text>
-          <Text
-            style={{ color: "#424856", fontSize: 8, lineHeight: 8 }}
-            numberOfLines={1}
-            ellipsizeMode="tail"
-          >
-            {item.place}
-          </Text>
-        </View>
-      </View>
-    </View>
-  </TouchableOpacity>
-);
-const renderSecondItem = ({ item }) => (
-  <View style={[styles.SeconditemContainer]}>
-    <Image
-      style={[styles.image, { borderRadius: 14 }]}
-      source={{ uri: item.imageUrl }}
-    />
-    {/* <View
-      style={{
-        width: 110,
-        height: 160,
-        backgroundColor: "gray",
-        borderRadius: BORDER_RADIUS.MEDIUM,
-        marginVertical: 8,
-      }}
-    ></View> */}
-    <View style={{ flex: 1, justifyContent: "flex-end" }}>
-      <Text
-        style={{
-          color: "#9095A1",
-          fontSize: 12,
-          paddingHorizontal: 4,
-          paddingVertical: 4,
-        }}
-      >
-        {item.Date}
-      </Text>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <Text
-          style={{ paddingHorizontal: 4, color: "#424856", fontSize: 14 }}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          {item.event}
-        </Text>
-        <View style={{ flexDirection: "row" }}>
-          <EvilIcons name="location" size={22} color="#8E94A0" />
-          <Text style={{ color: "#BDC0C9" }}>TBA</Text>
-        </View>
-      </View>
-    </View>
-  </View>
-);
 const EntertainmentScreeen = ({ navigation }) => {
+  const [activeItem, setActiveItem] = useState(null);
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={[
+        styles.itemContainer,
+        { backgroundColor: "#F2F3F4", marginTop: MARGIN.SMALL },
+      ]}
+    >
+      {/* <Image style={styles.image} source={{ uri: item.imageUrl }} /> */}
+
+      {/* <View
+        style={{
+          width: 110,
+          height: 160,
+          backgroundColor: "gray",
+          borderRadius: BORDER_RADIUS.MEDIUM,
+          marginVertical: 8,
+        }}
+      ></View> */}
+      <View style={{ flex: 1, justifyContent: "flex-end" }}>
+        <View
+          style={{ alignItems: "center", flexDirection: "row", padding: 4 }}
+        >
+          <EvilIcons name="location" size={22} color="black" />
+          <View>
+            <Text style={{ color: "#9095A1", fontSize: 10, lineHeight: 10 }}>
+              {item.location}
+            </Text>
+            <Text
+              style={{ color: "#424856", fontSize: 8, lineHeight: 8 }}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.place}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+  const renderSecondItem = ({ item, index }) => {
+    const isActive = item.id === activeItem;
+
+    return (
+      <TouchableOpacity
+        style={[styles.SeconditemContainer, isActive && styles.activeItem]}
+      >
+        <Image
+          style={[styles.image, { borderRadius: 14 }]}
+          source={{ uri: item.imageUrl }}
+        />
+        <View
+          style={{ paddingBottom: 10, flex: 1, justifyContent: "flex-end" }}
+        >
+          <Text
+            style={{
+              color: "#9095A1",
+              fontSize: 12,
+              paddingHorizontal: 4,
+              paddingVertical: 4,
+            }}
+          >
+            {item.Date}
+          </Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text
+              style={{ paddingHorizontal: 4, color: "#424856", fontSize: 14 }}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.event}
+            </Text>
+            <View style={{ flexDirection: "row" }}>
+              <EvilIcons name="location" size={22} color="#8E94A0" />
+              <Text style={{ color: "#BDC0C9" }}>TBA</Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+  });
+  const onViewableItemsChanged = useRef(({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      setActiveItem(viewableItems[0].item.id);
+    }
+  });
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -235,7 +250,9 @@ const EntertainmentScreeen = ({ navigation }) => {
 
         <View style={styles.secondContainer}>
           <View style={styles.SecondInnerContainer}>
-            <View style={styles.headerTextContainer}>
+            <View
+              style={[styles.headerTextContainer, { position: "relative" }]}
+            >
               <Text style={styles.headerText}>Arts & Gallery</Text>
               <TouchableOpacity
                 style={{ position: "absolute", right: 10 }}
@@ -270,14 +287,66 @@ const EntertainmentScreeen = ({ navigation }) => {
                 <Text style={styles.navigateText}>View All</Text>
               </TouchableOpacity>
             </View>
-            <FlatList
-              data={data2}
-              renderItem={renderSecondItem}
-              nestedScrollEnabled={true}
-              keyExtractor={(item) => item.id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
+            <View style={{}}>
+              <View>
+                <FlatList
+                  data={data2}
+                  renderItem={renderSecondItem}
+                  nestedScrollEnabled={true}
+                  keyExtractor={(item) => item.id}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  onViewableItemsChanged={onViewableItemsChanged.current}
+                  viewabilityConfig={viewabilityConfig.current}
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.fourthContainer}>
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>Sports</Text>
+          </View>
+          <View style={styles.contentContainer}>
+            <View style={styles.imageContainer}>
+              <Image
+                style={styles.image4}
+                source={{ uri: "https://via.placeholder.com/100" }}
+              />
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "column",
+
+                padding: 4,
+              }}
+            >
+              <View style={styles.textContainer}>
+                <Text style={styles.titleText}>Sports And Stadiums</Text>
+                <Text
+                  style={styles.descriptionText}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  Dive in to Ethiopia's stadiums and sports Area
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={{
+                  alignSelf: "flex-end",
+                  marginRight: 30,
+                  width: 70,
+                  height: 35,
+                  backgroundColor: "#ED5E00",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 4,
+                }}
+              >
+                <Text style={{ color: "#E8CAB2" }}>See</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -291,7 +360,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFEFE",
-    //alignItems: "center",
   },
   header: {
     backgroundColor: Colors.PURPLE,
@@ -306,7 +374,6 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOpacity: 1,
   },
-
   headerText: {
     color: Colors.BLACK,
     fontSize: FONT_SIZES.EXTRA_LARGE,
@@ -328,7 +395,6 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
   },
   secondContainer: {
-    //marginTop: MARGIN.SMALL,
     marginLeft: 12,
   },
   navigateText: {
@@ -342,7 +408,6 @@ const styles = StyleSheet.create({
     marginRight: MARGIN.MEDIUM,
     width: 110,
     height: 160,
-    // Adjust the width as needed
     marginBottom: MARGIN.LARGE,
   },
   headerTextContainer: {
@@ -362,8 +427,6 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: BORDER_RADIUS.EXTRA_LARGE,
     marginRight: MARGIN.MEDIUM,
-
-    // Adjust the width as needed
     marginBottom: MARGIN.LARGE,
   },
   SecondInnerContainer: {
@@ -428,5 +491,61 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     gap: 8,
     borderRadius: 8,
+  },
+  fourthContainer: {
+    marginTop: MARGIN.SMALL,
+    marginLeft: 12,
+    marginVertical: MARGIN.SMALL,
+  },
+  contentContainer: {
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 0.5,
+    elevation: 1,
+    borderRadius: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: MARGIN.SMALL,
+  },
+  imageContainer: {
+    backgroundColor: "#FFFFFF",
+    marginRight: 8,
+  },
+  image4: {
+    width: 100,
+    height: 100,
+  },
+  textContainer: {
+    backgroundColor: "#FFFFFF",
+    flex: 1,
+    width: 170,
+  },
+  titleText: {
+    fontSize: 15,
+    fontWeight: "400",
+  },
+  descriptionText: {
+    color: "#BDC0C9",
+    fontSize: 12,
+    lineHeight: 18,
+    color: "gray",
+  },
+  activeItem: {
+    borderRadius: 14,
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 0.5,
+
+    elevation: 1,
   },
 });

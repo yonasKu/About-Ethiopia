@@ -169,7 +169,12 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.TipsContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("TravelTips");
+            }}
+            style={styles.TipsContainer}
+          >
             <View
               style={{
                 paddingHorizontal: PADDING.MEDIUM,
@@ -182,7 +187,6 @@ const HomeScreen = ({ navigation }) => {
                   fontSize: FONT_SIZES.MEDIUM,
                   fontWeight: "400",
                   fontStyle: "normal",
-                  //lineHeight: 28,
                   paddingVertical: 4,
                   color: "#171A1F",
                 }}
@@ -286,6 +290,7 @@ const styles = StyleSheet.create({
     color: "#171A1F",
   },
   image: {
+    borderRadius: 4,
     width: 200, // Adjust the width as needed
     height: 120, // Adjust the height as needed
   },
@@ -297,6 +302,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     marginHorizontal: 18,
+    marginVertical: 8,
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 15,
@@ -304,21 +310,38 @@ const styles = StyleSheet.create({
 
     backgroundColor: "#FFFEFE",
     marginTop: MARGIN.SMALL,
+    // backgroundColor: "#FFFFFF",
+    // shadowColor: "#000000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.18,
+    // shadowRadius: 0.5,
+    // elevation: 1,
+    // borderRadius: 4,
   },
   TipsContainer: {
     alignItems: "center",
-    marginTop: MARGIN.SMALL,
+    marginTop: MARGIN.MEDIUM,
     borderRadius: 14,
     flex: 1,
     display: "flex",
     marginHorizontal: 10,
-    borderWidth: 0.5,
-    borderColor: Colors.LightestGray,
-
     justifyContent: "center",
     flex: 1,
     flexDirection: "row",
     padding: PADDING.SMALL,
+
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 0.5,
+    elevation: 1,
   },
   navigateText: {
     fontSize: 12,

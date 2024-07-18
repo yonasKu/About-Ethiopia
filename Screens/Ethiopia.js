@@ -6,6 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React from "react";
@@ -92,12 +93,26 @@ const dataSecond = [
 ];
 
 const renderItem = ({ item }) => (
-  <View style={{ marginLeft: MARGIN.MEDIUM }}>
+  <View style={{ marginRight: MARGIN.MEDIUM }}>
     <Image style={styles.peoplesimage} source={{ uri: item.imageUrl }} />
   </View>
 );
 const renderItem2 = ({ item }) => (
-  <View style={{ marginLeft: MARGIN.MEDIUM }}>
+  <View
+    style={{
+      backgroundColor: "#FFFFFF",
+      shadowColor: "#000000",
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.18,
+      shadowRadius: 0.5,
+      elevation: 1,
+      marginLeft: MARGIN.MEDIUM,
+      borderRadius: 8,
+    }}
+  >
     <Text style={styles.listTitle}>{item.Title}</Text>
     <Image
       style={styles.fourthContainerimage}
@@ -110,32 +125,68 @@ const Ethiopia = () => {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <ScrollView nestedScrollEnabled={true}>
-        <Text>Ethiopia</Text>
         <View
           style={{
-            //backgroundColor: "red",
+            // backgroundColor: "red",
             display: "flex",
-            flexDirection: "row",
+            paddingTop: PADDING.LARGE,
+            position: "relative",
           }}
         >
-          <View style={{ flex: 1, justifyContent: "flex-end" }}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "flex-end",
+              // marginTop: MARGIN.SMALL,
+            }}
+          >
             <View
               style={{
+                flex: 1,
+                borderRadius: 8,
                 backgroundColor: "#165434",
                 height: 105,
+                gap: 4,
+                justifyContent: "center",
               }}
-            ></View>
+            >
+              <Text
+                style={{
+                  marginLeft: 36,
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  color: "#FCF2F2",
+                }}
+              >
+                Discover Ethiopia
+              </Text>
+              <Text
+                style={{
+                  width: 215,
+                  fontSize: 12,
+                  color: "#F6F2FF",
+                  marginLeft: 18,
+                }}
+              >
+                Embark on Enlightening Ethiopian Experiences
+              </Text>
+            </View>
           </View>
 
           <View
             style={{
-              backgroundColor: "gray",
+              backgroundColor: "lightgray", // Corrected color name
+              marginRight: MARGIN.SMALL,
+              opacity: 0.5,
               width: 110,
               height: 125,
+              position: "absolute",
+              bottom: 0, // Ensures the gray container is aligned at the bottom
+              right: 2,
+              marginTop: -15, // Adjust this value to control the overflow from the top
             }}
           ></View>
         </View>
-
         <View style={styles.artsContainer}>
           <Text
             style={{
@@ -156,7 +207,18 @@ const Ethiopia = () => {
           />
         </View>
         <View style={styles.historyContainer}>
-          <Text style={styles.subHeading}>History</Text>
+          <View style={{ position: "relative", justifyContent: "center" }}>
+            <Text style={styles.subHeading}>History</Text>
+            {/* <TouchableOpacity
+              style={{ position: "absolute", right: 10 }}
+              onPress={() => {
+                navigation.navigate("Places");
+              }}
+            >
+              <Text style={styles.navigateText}>View All</Text>
+            </TouchableOpacity> */}
+          </View>
+
           <Pressable style={styles.innerhistoryContainer}>
             <View
               style={{
@@ -229,8 +291,9 @@ const Ethiopia = () => {
                   borderTopLeftRadius: 15,
                   borderBottomLeftRadius: 15,
                   backgroundColor: "grey",
+                  opacity: 0.65,
                   width: 85,
-                  height: 95,
+                  height: 85,
                 }}
               ></View>
             </View>
@@ -303,23 +366,41 @@ const styles = StyleSheet.create({
     marginBottom: VERTICAL_SPACING.SMALL / 2,
   },
   artsContainer: {
-    marginTop: VERTICAL_SPACING.LARGE,
+    marginTop: VERTICAL_SPACING.SMALL,
     marginHorizontal: MARGIN.SMALL,
     padding: 5,
-    borderWidth: 0.5,
-    borderRadius: BORDER_RADIUS.SMALL,
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 0.5,
+    elevation: 1,
+    borderRadius: 4,
   },
   innerhistoryContainer: {
     alignItems: "center",
     borderRadius: 14,
     display: "flex",
     marginHorizontal: 10,
-    borderWidth: 1,
+
     height: 105,
     justifyContent: "center",
     flex: 1,
     flexDirection: "row",
     padding: PADDING.SMALL,
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 0.5,
+    elevation: 1,
+    // borderRadius: 4,
   },
   historyContainer: {
     marginTop: MARGIN.SMALL,
@@ -333,23 +414,37 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS.EXTRA_LARGE,
   },
   innerSecondContainer: {
-    paddingVertical: PADDING.SMALL / 2,
+    //paddingVertical: PADDING.SMALL / 2,
     justifyContent: "space-between",
+    marginBottom: VERTICAL_SPACING.MEDIUM,
+    marginLeft: VERTICAL_SPACING.MEDIUM,
   },
   innerThirdContainer: {
     alignItems: "center",
     borderRadius: 14,
     display: "flex",
     marginHorizontal: 10,
-    borderWidth: 1,
-    height: 95,
+    marginTop: VERTICAL_SPACING.SMALL,
+    //borderWidth: 1,
+    height: 85,
     justifyContent: "center",
     flex: 1,
     flexDirection: "row",
-    paddingVertical: PADDING.SMALL,
+    //paddingVertical: PADDING.SMALL,
+
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 0.5,
+    elevation: 1,
   },
   thirdContainer: {
     marginTop: MARGIN.SMALL,
+    paddingHorizontal: PADDING.SMALL,
   },
   fourthContainer: {
     marginTop: MARGIN.SMALL,
@@ -369,5 +464,13 @@ const styles = StyleSheet.create({
     color: "#323743",
     marginVertical: MARGIN.SMALL,
     marginLeft: MARGIN.SMALL,
+    paddingVertical: PADDING.SMALL / 2,
+  },
+  navigateText: {
+    fontSize: 12,
+    color: Colors.TextPurple,
+  },
+  flatListContent: {
+    marginLeft: MARGIN.MEDIUM,
   },
 });

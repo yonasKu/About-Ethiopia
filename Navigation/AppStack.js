@@ -6,6 +6,7 @@ import HomeScreen from "../Screens/HomeScreen.js";
 import Ethiopia from "../Screens/Ethiopia.js";
 import Places from "../Screens/Places.js";
 import EntertainmentScreeen from "../Screens/EntertainmentScreeen.js";
+import TravelTips from "../Screens/TravelTips.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,15 @@ const AppStack = () => {
       <Stack.Screen
         name="Entertainment"
         component={EntertainmentScreeen}
+        options={{
+          headerShown: true,
+          headerTitle: "",
+          headerStyle: {},
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="TravelTips"
+        component={TravelTips}
         options={{
           headerShown: true,
           headerTitle: "",
