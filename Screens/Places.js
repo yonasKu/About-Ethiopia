@@ -21,6 +21,7 @@ import {
   FONT_SIZES,
   MARGIN,
   PADDING,
+  VERTICAL_SPACING,
   windowHeight,
 } from "../Utils/Constants";
 
@@ -63,14 +64,14 @@ const renderItemSecond = ({ item }) => (
     {/* <View style={{ position: "absolute", bottom: 5 }}>
       <Text style={{ color: "#9095A1", fontSize: 16 }}>{item.name}</Text>
     </View> */}
-    <View
+    {/* <View
       style={{
         position: "absolute",
         backgroundColor: "rgba(0,0,0,0.15)", // Semi-transparent black overlay
         width: "100%",
         height: "100%",
       }}
-    />
+    /> */}
     <View
       style={{
         position: "absolute",
@@ -144,16 +145,15 @@ const Places = ({ navigation }) => {
             />
           </View>
           <View style={styles.secondContainer}>
-            <View style={styles.innerSecondContainer}>
-              <FlatList
-                data={data}
-                renderItem={renderItemSecond}
-                nestedScrollEnabled={true}
-                keyExtractor={(item) => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-              />
-            </View>
+            <FlatList
+              data={data}
+              renderItem={renderItemSecond}
+              nestedScrollEnabled={true}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              //style={{ backgroundColor: "#FFFFFF" }}
+            />
           </View>
           <TouchableOpacity style={styles.thirdContainer}>
             <View style={styles.headerTextContainer}>
@@ -344,8 +344,8 @@ const styles = StyleSheet.create({
 
     width: "90%",
     height: windowHeight / 14,
-    borderColor: "#ccc",
-    borderRadius: BORDER_RADIUS.SMALL,
+    borderColor: "#BDC0C9",
+    borderRadius: 8,
     borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -368,9 +368,10 @@ const styles = StyleSheet.create({
   },
   placesContainer: {
     marginLeft: 10,
+    marginTop: VERTICAL_SPACING.SMALL,
   },
   secondContainer: {
-    //marginTop: MARGIN.SMALL,
+    backgroundColor: "#FFFFFF",
     marginLeft: 4,
   },
   secondimage: {
@@ -380,7 +381,9 @@ const styles = StyleSheet.create({
     width: 285,
   },
   secondItemContainer: {
-    backgroundColor: "red",
+    flex: 1,
+
+    backgroundColor: "#FFFFFF",
     marginRight: MARGIN.MEDIUM,
     height: 165,
     width: 285, // Adjust the width as needed
@@ -396,6 +399,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontStyle: "normal",
     lineHeight: 32,
+    paddingVertical: PADDING.MEDIUM,
   },
   subHeaderText: {
     height: 28,
